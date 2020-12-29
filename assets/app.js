@@ -10,3 +10,6 @@ import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
+
+$.trumbowyg.svgPath = false;
+$('#product_description').trumbowyg();

@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Cocur\Slugify\Slugify;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
@@ -38,6 +40,9 @@ class Product
     private $enabled;
 
     /**
+     *  @var \DateTime $creationDate
+     *  
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     private $created_at;
@@ -149,7 +154,7 @@ class Product
 
     public function getSlug(): ?string
     {
-        return $this->slug;
+        return (new Slugify())->slugify($this->name); 
     }
 
     public function setSlug(string $slug): self
@@ -158,4 +163,5 @@ class Product
 
         return $this;
     }
+    
 }

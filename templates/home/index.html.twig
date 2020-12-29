@@ -3,7 +3,9 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-{% for product in products %}
+<div class="container">
+    {% for product in products %}
     {% include 'home/_card.html.twig' with {product: product} only %}
     {% endfor %}
+</div>
 {% endblock %}

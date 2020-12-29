@@ -1,4 +1,24 @@
 
 .navActive {
     color: black!important;
+    font-size: 1.2rem;
+}
+.card {
+    width: 20%;
+    margin: 10px;
+}
+
+
+/*css problem resolved for trumbowyg
+comment this to see the problem
+*/
+
+.trumbowyg-button-pane{
+    display: flex;
+}
+.trumbowyg-textarea{
+    width: 100%;
+}
+.trumbowyg-box textarea{
+    height: 100px!important;
 }

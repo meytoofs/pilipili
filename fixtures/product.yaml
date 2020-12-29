@@ -5,6 +5,6 @@ App\Entity\Product:
     price: <numberBetween(20,1000)>
     enabled: '40%? 1 : 0'
     created_at: '<dateTimeBetween("-200 days", "now")>'
-    slug: <text(10)>
+    slug (unique): <text(10)>
     brand_id: '@brand_*'
 
