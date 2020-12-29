@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Cocur\Slugify\Slugify;
 
 /**
  * @Route("/product")
@@ -35,9 +36,17 @@ class ProductController extends AbstractController
         $product->setCreatedAt(new \DateTime('now'));
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $contact = $form->getData();
+            $name = $contact->name;
+            $slugify = (new Slugify())->slugify($name);
+            $entityManager = $this->getDoctrine()->getManager();
+            $product->setEnabled(false);
+            $product->setSlug($slugify);
+            $entityManager->persist($product);
+            $entityManager->flush();
+            
             $message = (new \Swift_Message('Nouveau produit'))
             ->setFrom('quentinlevis@gmail.com')
             // On attribue le destinataire
@@ -48,17 +57,12 @@ class ProductController extends AbstractController
                     'email/contact.html.twig', 
                     [
                         'product' => $contact
-                    ]
-                ),
-                'text/html'
-            );
-            $mailer->send($message);
-            $entityManager = $this->getDoctrine()->getManager();
-            $product->setSlug('name');
-            $product->setEnabled(false);
-            $entityManager->persist($product);
-            $entityManager->flush();
-            $this->addFlash('success','flashmessage.successadd');
+                        ]
+                    ),
+                    'text/html'
+                );
+                $mailer->send($message);
+                $this->addFlash('success','flashmessage.successadd');
             return $this->redirectToRoute('product_index');
         }
 
@@ -110,6 +114,24 @@ class ProductController extends AbstractController
             $entityManager->flush();
         }
 
+        return $this->redirectToRoute('product_index');
+    }
+    /**
+    * @Route("/activation/{slug}", name="activation")
+    */
+    public function activation($slug, ProductRepository $products){
+        $product = $products->findOneBy(['slug' => $slug]);
+
+        if(!$product){
+            throw $this->createNotFoundException('Ce produit n\'existe pas');
+        }
+
+        $product->setEnabled(true);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($product);
+        $entityManager->flush();
+
+        $this->addFlash('message', 'flashmessage.enabled');
         return $this->redirectToRoute('product_index');
     }
 }

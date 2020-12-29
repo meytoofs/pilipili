@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Cocur\Slugify\Slugify;
 
+
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
@@ -22,7 +23,7 @@ class Product
     /**
      * @ORM\Column(type="string", length=55)
      */
-    private $name;
+    public $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -154,7 +155,7 @@ class Product
 
     public function getSlug(): ?string
     {
-        return (new Slugify())->slugify($this->name); 
+        return $this->slug;
     }
 
     public function setSlug(string $slug): self

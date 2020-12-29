@@ -3,3 +3,5 @@
 <p> Nom du produit: {{product.name}}</p>
 <p> Prix : {{product.price}}</p>
 <p> Description : {{product.description}}</p>
+
+<p><a href="{{ absolute_url(path('activation', {'slug': product.slug})) }}">Activer le produit</a></p>
