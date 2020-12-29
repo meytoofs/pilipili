@@ -16,4 +16,4 @@ php bin/console hautelook:fixtures:load
 symfony server:start
 ```
 
-Ce rendre sur http://localhost:8000/accueil
+Ce rendre sur http://localhost:8000/
