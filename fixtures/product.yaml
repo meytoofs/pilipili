@@ -1,0 +1,10 @@
+App\Entity\Product:
+  product_{1..100}:
+    name: <text(10)>
+    description: <text(100)>
+    price: <numberBetween(20,1000)>
+    enabled: '40%? 1 : 0'
+    created_at: '<dateTimeBetween("-200 days", "now")>'
+    slug: <text(10)>
+    brand_id: '@brand_*'
+
