@@ -21,4 +21,11 @@ class HomeController extends AbstractController
             'currentHome' => 'home',
         ]);
     }
+    /**
+     * @Route("/finished", name="finished")
+     */
+    public function cookieFinished()
+    {
+        return $this->render('home/finish.html.twig');
+    }
 }
