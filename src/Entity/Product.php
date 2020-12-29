@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Cocur\Slugify\Slugify;
+
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
@@ -20,7 +23,7 @@ class Product
     /**
      * @ORM\Column(type="string", length=55)
      */
-    private $name;
+    public $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -38,6 +41,9 @@ class Product
     private $enabled;
 
     /**
+     *  @var \DateTime $creationDate
+     *  
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     private $created_at;
@@ -48,7 +54,7 @@ class Product
     private $updated_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity=brand::class, inversedBy="products")
+     * @ORM\ManyToOne(targetEntity=Brand::class, inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
     private $brand_id;
@@ -158,4 +164,5 @@ class Product
 
         return $this;
     }
+    
 }

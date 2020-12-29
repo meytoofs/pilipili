@@ -1,0 +1,8 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class = "isActive">{{ product.name}}</h5>
+        <p> {{ product.description }}</p>
+        <p class="text text-muted"> SLUG : {{ product.slug }}</p>
+        <p class="text text-muted">{{ product.createdAt | date ("m/d/Y") }}</p>
+    </div>
+</div>

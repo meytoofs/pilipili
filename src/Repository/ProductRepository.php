@@ -18,7 +18,16 @@ class ProductRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Product::class);
     }
-
+    public function findAvailable()
+    {
+        $result = $this
+        ->createQueryBuilder('p')
+        ->select('p')
+        ->where('p.enabled = 1')
+        ->getQuery()
+        ->getResult();
+        return $result;
+    }
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */
