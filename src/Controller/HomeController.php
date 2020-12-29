@@ -22,7 +22,7 @@ class HomeController extends AbstractController
         ]);
     }
     /**
-     * @Route("/finished", name="finished")
+     * @Route("/privacy-statement", name="finished")
      */
     public function cookieFinished()
     {

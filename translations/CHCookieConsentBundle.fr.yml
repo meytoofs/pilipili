@@ -1,0 +1,19 @@
+ch_cookie_consent:
+    title: 'Cookies dans votre site.'
+    intro: ''
+    read_more: 'En savoir plus'
+    analytics: 
+        title: 'Voulez vous les cookies Analytique?'
+        description: ''
+    tracking: 
+        title: 'Voulez vous les cookies de Tracking?'
+        description: ''
+    social_media:
+        title: 'Voulez vous les cookies associés aux réseaux sociaux?'
+        description:
+    marketing:
+        title: 'Voulez vous des pubs personnalisées?'
+        description: ''
+    yes: 'oui'
+    no: 'no'
+    save:  'Sauvegarder'
