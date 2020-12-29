@@ -29,7 +29,7 @@ class ProductController extends AbstractController
     /**
      * @Route("/new", name="product_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, \Swift_Mailer $mailer): Response
     {
         $product = new Product();
         $product->setCreatedAt(new \DateTime('now'));
@@ -37,6 +37,22 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $contact = $form->getData();
+            $message = (new \Swift_Message('Nouveau produit'))
+            ->setFrom('quentinlevis@gmail.com')
+            // On attribue le destinataire
+            ->setTo('quentinlevis@gmail.com')
+            // On crée le texte avec la vue
+            ->setBody(
+                $this->renderView(
+                    'email/contact.html.twig', 
+                    [
+                        'product' => $contact
+                    ]
+                ),
+                'text/html'
+            );
+            $mailer->send($message);
             $entityManager = $this->getDoctrine()->getManager();
             $product->setSlug('name');
             $product->setEnabled(false);
