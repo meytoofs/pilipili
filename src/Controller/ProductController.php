@@ -132,6 +132,6 @@ class ProductController extends AbstractController
         $entityManager->flush();
 
         $this->addFlash('message', 'flashmessage.enabled');
-        return $this->redirectToRoute('product_index');
+        return $this->redirectToRoute('home');
     }
 }
