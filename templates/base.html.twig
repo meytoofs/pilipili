@@ -26,6 +26,11 @@
             </nav>
         </header>
         {% endblock %}
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message | trans }}
+        </div>
+    {% endfor %}
         <div class="container-fluid">
             {% block body %}{% endblock %}
         </div>
